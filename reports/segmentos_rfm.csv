@@ -1,0 +1,5 @@
+cluster,clientes,recencia_media,frequencia_media,valor_medio,ticket_medio,taxa_recompra_90d,segmento,pct_clientes,pct_receita
+1,786,57.83,14.2,4162.61,277.36,0.7,"1. alto valor, recente",13.44,62.12
+2,1383,344.15,4.8,911.09,184.65,0.12,"2. alto valor, inativo",23.65,23.93
+0,990,43.17,2.19,353.78,156.77,0.48,"3. baixo valor, recente",16.93,6.65
+3,2690,451.72,1.27,142.92,113.26,0.05,"4. baixo valor, inativo",45.99,7.3

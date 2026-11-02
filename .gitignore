@@ -1,0 +1,238 @@
+# --- dependências / build (frontend) ---
+node_modules
+dist
+dist-ssr
+build
+*.tsbuildinfo
+
+# --- dependências / build (.NET) ---
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+publish/
+*.publishsettings
+*.pubxml
+*.pubxml.user
+
+# --- dependências / build (Python — stack principal deste projeto) ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+
+# --- Flask (específico da stack) ---
+# instance/ é a pasta de configuração local do Flask: por convenção guarda
+# config com segredos (SECRET_KEY, credenciais) e NUNCA deve ser versionada.
+instance/
+# .flaskenv pode carregar variáveis de ambiente do app; não é coberto por .env.*
+.flaskenv
+*.pid
+*.sock
+
+# --- CLIs de deploy (mantido por higiene, mesmo sem deploy configurado) ---
+# .vercel/ guarda project.json com orgId/projectId; .netlify/ e equivalente.
+.vercel/
+.netlify/
+
+# --- caches de ferramentas ---
+.vite
+.cache
+.parcel-cache
+.eslintcache
+.turbo
+coverage
+.next
+.nuxt
+.pytest_cache
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+htmlcov/
+.coverage
+.coverage.*
+
+# --- segredos e ambiente ---
+# .env NUNCA entra no git. Só o exemplo, sem valores reais.
+.env
+.env.*
+!.env.example
+!.env.sample
+# pastas usadas por convenção para guardar material sensível
+secrets/
+credentials/
+private/
+*.pem
+*.key
+*.p12
+*.pfx
+*.pfxpassword
+*.crt
+*.cer
+*.der
+*.jks
+*.keystore
+*.asc
+*.gpg
+*.ppk
+id_rsa
+id_rsa.pub
+id_dsa
+id_dsa.pub
+id_ed25519
+id_ed25519.pub
+id_ecdsa
+id_ecdsa.pub
+known_hosts
+.ssh/
+.npmrc
+.netrc
+.pypirc
+.pgpass
+.my.cnf
+
+# --- segredos em JSON (nunca versionar com valores reais) ---
+secrets.json
+secrets.*.json
+credentials.json
+credentials.*.json
+appsettings.json
+appsettings.*.json
+!appsettings.example.json
+!appsettings.Example.json
+launchSettings.json
+!launchSettings.example.json
+config.json
+config.*.json
+!config.example.json
+firebase-adminsdk-*.json
+firebase-config.json
+gcp-credentials.json
+gcp-service-account*.json
+service-account*.json
+*-service-account.json
+azureauth.json
+aws-credentials.json
+auth.json
+token.json
+tokens.json
+*.token.json
+oauth.json
+private-keys.json
+*-private-key.json
+
+# --- segredos em outros formatos de config ---
+credentials.xml
+*.env.json
+*.secrets.yaml
+*.secrets.yml
+
+# --- ferramentas de teste de API (vazam tokens de autenticação com frequência) ---
+*.postman_environment.json
+postman/*.postman_environment.json
+insomnia.workspace.json
+.insomnia/
+*.har
+
+# --- banco de dados local / dumps ---
+*.sqlite
+*.sqlite3
+*.db
+*.bak
+*.dump
+*.sql
+!sql/*.sql
+*.sql.gz
+dump.rdb
+*.rdb
+
+# --- provedores de nuvem / infra ---
+.aws/
+.azure/
+.gcloud/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+!*.tfvars.example
+.terraform/
+kubeconfig
+*.kubeconfig
+.kube/
+
+# --- certificados de servidor (Let's Encrypt, nginx, etc.) ---
+*.csr
+letsencrypt/
+certs/
+ssl/
+!ssl/README.md
+
+# --- docker ---
+docker-compose.override.yml
+.docker/
+*.dockerenv
+
+# --- histórico de shell / agentes ---
+.bash_history
+.zsh_history
+.python_history
+.node_repl_history
+.mysql_history
+.psql_history
+
+.mcp.local.json
+.aider*
+.cursor/
+.cursorrules.local
+.windsurf/
+
+# --- logs ---
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+logs
+*.log.gz
+
+# --- backups e arquivos temporários (podem conter dumps antigos) ---
+*.orig
+*.old
+*.tmp
+*~
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.gz
+*.bz2
+*.xz
+*.7z
+*.rar
+*.iso
+
+# --- editor / IDE ---
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json.example
+.idea
+.vs/
+*.swp
+*.swo
+*.sublime-workspace
+*.suo
+*.ntvs*
+*.njsproj
+.history/
+
+# --- sistema operacional ---
+.DS_Store
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+$RECYCLE.BIN/
+*.local

@@ -1,0 +1,79 @@
+{
+  "data_de_corte": "2025-09-30",
+  "clientes_analisados": 5849,
+  "eda": {
+    "receita_total_entregue": 6190547.43,
+    "pedidos_entregues": 26953,
+    "ticket_medio": 229.68,
+    "alta_nov_2024_vs_out_2024_pct": 70.9,
+    "retencao_media_mes1_pct": 24.2
+  },
+  "segmentacao": {
+    "k_escolhido": 4,
+    "silhouette_por_k": {
+      "2": 0.492,
+      "3": 0.371,
+      "4": 0.406,
+      "5": 0.364,
+      "6": 0.376,
+      "7": 0.372,
+      "8": 0.353
+    },
+    "silhouette_escolhido": 0.406
+  },
+  "classificacao": {
+    "taxa_base_recompra_90d": 0.224,
+    "modelos": {
+      "Regressão Logística": {
+        "roc_auc_cv_media": 0.918,
+        "roc_auc_cv_desvio": 0.01,
+        "roc_auc_teste": 0.928,
+        "pr_auc_teste": 0.801,
+        "precisao_teste": 0.737,
+        "recall_teste": 0.685,
+        "f1_teste": 0.71
+      },
+      "Gradient Boosting": {
+        "roc_auc_cv_media": 0.912,
+        "roc_auc_cv_desvio": 0.01,
+        "roc_auc_teste": 0.921,
+        "pr_auc_teste": 0.778,
+        "precisao_teste": 0.711,
+        "recall_teste": 0.624,
+        "f1_teste": 0.664
+      }
+    },
+    "melhor_modelo": "Regressão Logística",
+    "lift_decil_1": 3.96,
+    "ganho_top_20pct_clientes": 66.4,
+    "ganho_top_30pct_clientes": 82.6,
+    "variaveis_mais_importantes": [
+      "recencia_dias",
+      "ticket_medio",
+      "compras_ult_90d",
+      "frequencia",
+      "valor_total"
+    ]
+  },
+  "regressao": {
+    "clientes_que_recompraram": 1308,
+    "gasto_medio_90d": 692.7,
+    "modelos": {
+      "Baseline (média)": {
+        "mae": 550.16,
+        "rmse": 755.42,
+        "r2": -0.0
+      },
+      "Ridge": {
+        "mae": 366.6,
+        "rmse": 561.56,
+        "r2": 0.447
+      },
+      "Gradient Boosting": {
+        "mae": 352.65,
+        "rmse": 550.41,
+        "r2": 0.469
+      }
+    }
+  }
+}
