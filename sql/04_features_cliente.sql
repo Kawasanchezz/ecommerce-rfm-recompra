@@ -1,9 +1,3 @@
--- Tabela analítica por cliente, usada na segmentação e nos modelos.
---
--- Parâmetro nomeado: :ref_date (data de corte, formato YYYY-MM-DD).
---   * Todas as variáveis explicativas usam SOMENTE pedidos até :ref_date.
---   * Os alvos (recomprou_90d, gasto_90d) olham os 90 dias seguintes.
--- Essa separação temporal evita vazamento de dados (data leakage).
 WITH historico AS (
     SELECT
         customer_id,

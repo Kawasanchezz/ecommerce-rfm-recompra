@@ -1,5 +1,3 @@
--- Receita bruta por canal de aquisição e categoria, com ranking dentro de cada canal
--- (RANK) e participação da categoria na receita do canal.
 WITH receita AS (
     SELECT
         c.channel                  AS canal,

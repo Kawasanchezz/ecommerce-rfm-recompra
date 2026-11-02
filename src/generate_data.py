@@ -29,7 +29,6 @@ DB_PATH = ROOT / "data" / "loja.db"
 CHANNELS = ["organico", "busca_paga", "social", "email", "indicacao"]
 CHANNEL_PROBS = [0.30, 0.25, 0.20, 0.15, 0.10]
 
-# Probabilidade de cada perfil (alto valor, regular, ocasional, baixo engajamento) por canal.
 SEGMENT_PROBS_BY_CHANNEL = {
     "organico": [0.10, 0.33, 0.42, 0.15],
     "busca_paga": [0.08, 0.30, 0.42, 0.20],
@@ -38,7 +37,6 @@ SEGMENT_PROBS_BY_CHANNEL = {
     "indicacao": [0.20, 0.38, 0.30, 0.12],
 }
 
-# Parâmetros por perfil: pedidos/mês, vida média (meses), ticket médio (R$), cupom, cancelamento.
 SEGMENT_PARAMS = [
     {"rate": 1.30, "life_months": 30, "ticket": 320, "coupon": 0.15, "cancel": 0.03},
     {"rate": 0.55, "life_months": 14, "ticket": 180, "coupon": 0.25, "cancel": 0.04},
@@ -52,7 +50,6 @@ STATE_PROBS = [0.35, 0.12, 0.11, 0.07, 0.07, 0.06, 0.05, 0.05, 0.06, 0.06]
 CATEGORIES = ["Eletronicos", "Moda", "Casa", "Beleza", "Esporte", "Livros", "Pet"]
 CATEGORY_PROBS = [0.18, 0.25, 0.20, 0.15, 0.10, 0.07, 0.05]
 
-# Sazonalidade: novembro (Black Friday) e dezembro vendem mais.
 SEASONALITY = {11: 1.8, 12: 1.4}
 SEASONALITY_MAX = max(SEASONALITY.values())
 
@@ -96,7 +93,6 @@ CREATE INDEX idx_items_order     ON order_items (order_id);
 def build_customers(rng: np.random.Generator) -> tuple[pd.DataFrame, np.ndarray]:
     """Cria os clientes e devolve também o perfil latente de cada um (não vai para o banco)."""
     total_days = (LAST_SIGNUP - DATA_START).days
-    # Beta(1.3, 1) concentra cadastros mais recentes: a base cresce ao longo do tempo.
     signup_offsets = (rng.beta(1.3, 1.0, N_CUSTOMERS) * total_days).astype(int)
     signup_dates = [DATA_START + timedelta(days=int(d)) for d in signup_offsets]
 

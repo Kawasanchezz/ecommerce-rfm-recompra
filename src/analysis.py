@@ -47,7 +47,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 SEED = 42
-REF_DATE = "2025-09-30"  # corte: features até aqui; alvo nos 90 dias seguintes
+REF_DATE = "2025-09-30"
 
 ROOT = Path(__file__).resolve().parents[1]
 DB_PATH = ROOT / "data" / "loja.db"
@@ -93,9 +93,6 @@ def save_fig(fig: plt.Figure, name: str) -> None:
     plt.close(fig)
 
 
-# --------------------------------------------------------------------------- #
-# 1. Análise exploratória a partir das consultas SQL
-# --------------------------------------------------------------------------- #
 def exploratory_analysis(conn: sqlite3.Connection) -> dict:
     monthly = run_sql(conn, "01_receita_mensal.sql")
     cohorts = run_sql(conn, "02_retencao_coortes.sql")
@@ -139,9 +136,6 @@ def exploratory_analysis(conn: sqlite3.Connection) -> dict:
     }
 
 
-# --------------------------------------------------------------------------- #
-# 2. Segmentação RFM com K-Means
-# --------------------------------------------------------------------------- #
 def segment_customers(df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
     rfm = df[["recencia_dias", "frequencia", "valor_total"]]
     scaled = StandardScaler().fit_transform(np.log1p(rfm))
@@ -151,7 +145,6 @@ def segment_customers(df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
         labels = KMeans(n_clusters=k, n_init=10, random_state=SEED).fit_predict(scaled)
         scores[k] = silhouette_score(scaled, labels, sample_size=4000, random_state=SEED)
 
-    # Exige ao menos 3 segmentos (utilidade de negócio) e escolhe o melhor silhouette até 6.
     best_k = max(range(3, 7), key=lambda k: scores[k])
     model = KMeans(n_clusters=best_k, n_init=10, random_state=SEED)
     out = df.copy()
@@ -212,9 +205,6 @@ def segment_customers(df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
     return out, metrics
 
 
-# --------------------------------------------------------------------------- #
-# 3 e 4. Modelos preditivos
-# --------------------------------------------------------------------------- #
 def make_preprocessor(scale: bool) -> ColumnTransformer:
     numeric_steps = [("imputer", SimpleImputer(strategy="median"))]
     if scale:
@@ -264,7 +254,6 @@ def classification(df: pd.DataFrame) -> dict:
     best_name = max(results, key=lambda n: results[n]["roc_auc_teste"])
     best_pipeline, best_proba = fitted[best_name]
 
-    # Lift e ganho acumulado por decil (útil para priorizar campanhas).
     ranking = pd.DataFrame({"y": y_test.values, "proba": best_proba}).sort_values("proba", ascending=False)
     ranking["decil"] = pd.qcut(np.arange(len(ranking)), 10, labels=range(1, 11))
     base_rate = ranking["y"].mean()
@@ -347,7 +336,7 @@ def main() -> None:
         features = run_sql(conn, "04_features_cliente.sql", {"ref_date": REF_DATE})
 
     segmented, seg_metrics = segment_customers(features)
-    segmented.to_csv(REPORTS / "clientes_segmentados.csv", index=False)  # pronto para BI
+    segmented.to_csv(REPORTS / "clientes_segmentados.csv", index=False)
 
     metrics = {
         "data_de_corte": REF_DATE,

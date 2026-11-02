@@ -1,5 +1,3 @@
--- Receita mensal com variação mês a mês (LAG) e média móvel de 3 meses.
--- Considera apenas pedidos entregues.
 WITH mensal AS (
     SELECT
         strftime('%Y-%m', order_date)  AS mes,

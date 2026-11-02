@@ -1,5 +1,3 @@
--- Retenção por coorte: % de clientes de cada mês de primeira compra que voltam
--- a comprar nos 12 meses seguintes (mes_idx = meses desde a primeira compra).
 WITH primeira AS (
     SELECT customer_id, MIN(order_date) AS primeira_data
     FROM orders
